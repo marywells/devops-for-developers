@@ -1,9 +1,9 @@
-import * as pulumi from '@pulumi/pulumi';
-import * as aws from '@pulumi/aws';
-import { FmBucket } from './resources/bucket';
 import { FmFrontend } from './services/frontend';
+import { FmBackend } from './services/backend';
 
 function main() {
+  new FmBackend({ Name: 'example-mary', Product: 'devops-course' });
+
   new FmFrontend({
     Name: 'example-mary',
     Product: 'devops-course',

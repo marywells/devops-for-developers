@@ -1,6 +1,7 @@
 import * as pulumi from '@pulumi/pulumi';
 import { getStack } from '@pulumi/pulumi';
 import * as aws from '@pulumi/aws';
+import * as fs from 'fs';
 
 type FmBucketArgs = {
   Name: string;
@@ -18,19 +19,36 @@ export class FmBucket extends pulumi.ComponentResource {
 
     const bucketName = `${resourceName}-${stack}`;
 
-    const bucket = new aws.s3.Bucket(
-      args.Name,
-      {
-        acl: 'private',
-        bucket: bucketName,
-        tags: {
-          Environment: stack,
-        },
+    let bucketArgs: aws.s3.BucketArgs = {
+      acl: 'private',
+      bucket: bucketName,
+      tags: {
+        Environment: stack,
       },
-      {
-        parent: this,
-      }
-    );
+    };
+
+    if (args.Public) {
+      bucketArgs = {
+        acl: 'public-read',
+        website: {
+          indexDocument: 'index.html',
+          errorDocument: 'error.html',
+          routingRules: `[{
+        "Condition": {
+            "KeyPrefixEquals": "docs/"
+        },
+        "Redirect": {
+            "ReplaceKeyPrefixWith": "documents/"
+        }
+    }]
+    `,
+        },
+      };
+    }
+
+    const bucket = new aws.s3.Bucket(args.Name, bucketArgs, {
+      parent: this,
+    });
     if (!args.Public) {
       new aws.s3.BucketPublicAccessBlock(
         args.Name,

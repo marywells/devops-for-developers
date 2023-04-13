@@ -26,15 +26,5 @@ export class FmFrontend extends ComponentResource {
         parent: this,
       }
     );
-
-    new FmBucket(
-      {
-        Name: `${args.Name}-replica`,
-        Product: args.Product,
-      },
-      {
-        parent: this,
-      }
-    );
   }
 }
