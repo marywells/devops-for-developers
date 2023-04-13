@@ -1,4 +1,9 @@
 {
-    "Name": "devops-course",
-    "ServiceType": "frontend"
+    "ServiceName": "devops-course",
+    "ServiceType": "frontend",
+    "Dockerfile": {
+        "PreInstallCommands": [
+            "COPY myfile myfile"
+        ]
+    }
 }
