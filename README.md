@@ -1,0 +1,3 @@
+POC using Pulumi to create and deploy AWS infrastructure with Typescript. Typed params determining optional privacy policy and enforced naming standards, all using a familiar programming language with inbuilt benefits.
+
+Sample templates for developers to auto-generate Dockerfile and circleci.yml etc using only build.json config, ensuring standardisation and appropriate guardrails across multiple products.
