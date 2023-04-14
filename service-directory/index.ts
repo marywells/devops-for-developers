@@ -2,11 +2,11 @@ import { FmFrontend } from './services/frontend';
 import { FmBackend } from './services/backend';
 
 function main() {
-  new FmBackend({ Name: 'example-mary', Product: 'devops-course' });
+  new FmBackend({ Name: 'backend', Product: 'devops-resource' });
 
   new FmFrontend({
-    Name: 'example-mary',
-    Product: 'devops-course',
+    Name: 'frontend',
+    Product: 'devops-resource',
   });
 }
 
