@@ -1,10 +1,12 @@
 //@ts-nocheck
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import Yargs, { config } from 'yargs';
 import { configure, render } from 'nunjucks';
 
 type BuildJSONDockerFile = {
+  InstallCommand: string;
   PreInstallCommands: string[];
+  PostInstallCommands: string[];
 };
 
 type BuildJSON = {
@@ -22,11 +24,9 @@ function main() {
 
   configure('templates', { autoescape: true });
 
-  const file = render('Dockerfile', {
-    ServiceName: configurationData.ServiceName,
-    ServiceType: configurationData.ServiceType,
-  });
+  const file = render('Dockerfile', configurationData);
   console.log(file);
+  // writeFileSync('Dockerfile', file);
 }
 
 main();

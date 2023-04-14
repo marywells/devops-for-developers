@@ -1,9 +1,15 @@
 {
-    "ServiceName": "devops-course",
+    "ServiceName": "devops-with-pulumi",
     "ServiceType": "frontend",
     "Dockerfile": {
         "PreInstallCommands": [
             "COPY myfile myfile"
+        ],
+        "InstallCommand": [
+            "RUN yarn install"
+        ],
+        "PostInstallCommands": [
+            "RUN echo yay!"
         ]
     }
 }
